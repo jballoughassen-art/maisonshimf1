@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Shim | Haute Pâtisserie Artisanale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F5F0EB',
+                        'cream-dark': '#E8E0D8',
+                        gold: '#C9A96E',
+                        'gold-light': '#D4BA85',
+                        'gold-dark': '#B8944D',
+                        dark: '#1A1A1A',
+                        'dark-light': '#2D2D2D',
+                        chocolate: '#4A3728',
+                        'chocolate-light': '#5C4738',
+                    },
+                    fontFamily: {
+                        serif: ['Georgia', 'Times New Roman', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.bunny.net/css?family=inter:300,400,500,600,700|playfair-display:400,500,600,700');
+
+        * { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Playfair Display', serif; }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, rgba(26,26,26,0.1) 40%, rgba(26,26,26,0.6) 100%);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #C9A96E 0%, #D4BA85 50%, #B8944D 100%);
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #C9A96E 0%, #D4BA85 50%, #B8944D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+        .product-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .insta-grid-item {
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .insta-grid-item:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+        .insta-grid-item:hover .insta-overlay {
+            opacity: 1;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #C9A96E;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #C9A96E 0%, #D4BA85 50%, #B8944D 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201,169,110,0.4);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #C9A96E, transparent);
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #C9A96E;
+            box-shadow: 0 0 0 3px rgba(201,169,110,0.15);
+        }
+
+        .category-btn.active {
+            background: linear-gradient(135deg, #C9A96E 0%, #D4BA85 50%, #B8944D 100%);
+            color: white;
+        }
+
+        .admin-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(245,240,235,0.95);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 50;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #25D366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37,211,102,0.5);
+        }
+
+        .modal-overlay {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .parallax-slow {
+            will-change: transform;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.3) 50%, transparent 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .product-order-btn {
+            transition: all 0.3s ease;
+        }
+        .product-order-btn:hover {
+            background-color: #25D366;
+            color: white;
+            border-color: #25D366;
+        }
+
+        .cart-badge {
+            animation: pulse 0.3s ease;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .admin-login-overlay {
+            background: rgba(26,26,26,0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+            .mobile-menu.open {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-cream text-dark overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#accueil" class="flex items-center space-x-2 z-50">
+                    <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
+                        <span class="font-heading text-white font-bold text-lg">M</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold tracking-wide">Maison Shim</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#accueil" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Accueil</a>
+                    <a href="#instagram" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Instagram</a>
+                    <a href="#produits" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Nos Produits</a>
+                    <a href="#histoire" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Notre Histoire</a>
+                    <a href="#contact" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Contact</a>
+                    <button onclick="openAdminLogin()" class="text-xs tracking-wider uppercase text-dark/40 hover:text-gold transition-colors">
+                        <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </button>
+                    <button onclick="openCart()" class="relative p-2 hover:bg-dark/5 rounded-full transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 gold-gradient text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 z-50">
+                    <div id="hamburger" class="w-6 h-5 relative">
+                        <span class="absolute left-0 top-0 w-6 h-0.5 bg-dark transition-all duration-300"></span>
+                        <span class="absolute left-0 top-2 w-6 h-0.5 bg-dark transition-all duration-300"></span>
+                        <span class="absolute left-0 top-4 w-6 h-0.5 bg-dark transition-all duration-300"></span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-screen w-72 bg-cream shadow-2xl md:hidden z-40 pt-24 px-8">
+            <div class="flex flex-col space-y-6">
+                <a href="#accueil" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Accueil</a>
+                <a href="#instagram" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Instagram</a>
+                <a href="#produits" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Nos Produits</a>
+                <a href="#histoire" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Notre Histoire</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Contact</a>
+                <button onclick="openAdminLogin()" class="text-left text-sm tracking-wider uppercase text-dark/40 hover:text-gold transition-colors pt-4">
+                    Administration
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/190a3ff8c-9d89-4d57-96ad-f3690b67063f.png" alt="Maison Shim Pâtisserie" class="w-full h-full object-cover parallax-slow" id="hero-img">
+            <div class="hero-gradient absolute inset-0"></div>
+        </div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div class="mb-6">
+                <span class="inline-block text-gold-light text-sm tracking-[0.3em] uppercase font-light mb-4">Pâtisserie Artisanale</span>
+                <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-bold leading-tight mb-6">
+                    L'art de la<br>
+                    <span class="text-gold-gradient">haute pâtisserie</span>
+                </h1>
+            </div>
+            <p class="text-white/80 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                Des créations d'exception, élaborées avec passion et les meilleurs ingrédients, au cœur de la Tunisie.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#produits" class="btn-gold text-white px-10 py-4 rounded-full text-sm tracking-wider uppercase font-medium inline-block">
+                    Découvrir nos créations
+                </a>
+                <a href="#contact" class="border border-white/40 text-white px-10 py-4 rounded-full text-sm tracking-wider uppercase font-medium hover:bg-white/10 transition-all inline-block">
+                    Nous rendre visite
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 scroll-indicator">
+            <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </div>
+    </section>
+
+    <!-- Instagram Feed Section -->
+    <section id="instagram" class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-gold text-sm tracking-[0.3em] uppercase">Suivez-nous</span>
+                <h2 class="font-heading text-3xl md:text-4xl font-semibold mt-3 mb-4">@maison_shim</h2>
+                <p class="text-dark/60 max-w-xl mx-auto">Découvrez nos dernières créations et coulisses sur Instagram</p>
+                <a href="https://www.instagram.com/maison_shim?igsh=MTIwMHE1YjhsM2U4dA==" target="_blank" class="inline-flex items-center gap-2 text-gold hover:text-gold-dark transition-colors mt-4 text-sm tracking-wider uppercase">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    Voir plus sur Instagram
+                </a>
+            </div>
+
+            <!-- Instagram Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 max-w-5xl mx-auto">
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png" alt="Instagram post 1" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d4ae7ac4-578a-464a-bd09-b96415f06cea.png" alt="Instagram post 2" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d97cd048-e131-440b-b0eb-d128e8938ef8.png" alt="Instagram post 3" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1b613cce1-a48a-4e97-b99b-d02cecfe5369.png" alt="Instagram post 4" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/10f3fa9a1-71d3-4b4e-921c-4e4e9b5ba49e.png" alt="Instagram post 5" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/19521578b-e849-4b90-86a9-b834b295572b.png" alt="Instagram post 6" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1bd8c0ca9-4bb4-4d8b-80e8-ac3847991e1e.png" alt="Instagram post 7" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1124d5197-4c9f-4e2c-b774-7a1bac2077cd.png" alt="Instagram post 8" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13a383592-be6b-4354-94dc-465fc4045268.png" alt="Instagram post 9" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-xs mx-auto"></div>
+
+    <!-- Products Section -->
+    <section id="produits" class="py-20 md:py-28 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-gold text-sm tracking-[0.3em] uppercase">Notre Carte</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-semibold mt-3 mb-6">Nos Créations</h2>
+                <p class="text-dark/60 max-w-2xl mx-auto">Chaque pièce est un chef-d'œuvre, créé avec les meilleurs ingrédients et un savoir-faire d'exception.</p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 fade-in">
+                <button onclick="filterProducts('all')" class="category-btn active px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="all">Tout</button>
+                <button onclick="filterProducts('entremets')" class="category-btn px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="entremets">Entremets</button>
+                <button onclick="filterProducts('gateaux')" class="category-btn px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="gateaux">Gâteaux de Voyage</button>
+                <button onclick="filterProducts('viennoiseries')" class="category-btn px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="viennoiseries">Viennoiseries</button>
+                <button onclick="filterProducts('macarons')" class="category-btn px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="macarons">Macarons</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Products will be rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-xs mx-auto"></div>
+
+    <!-- About Section -->
+    <section id="histoire" class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in order-2 lg:order-1">
+                    <span class="text-gold text-sm tracking-[0.3em] uppercase">Notre Histoire</span>
+                    <h2 class="font-heading text-3xl md:text-4xl font-semibold mt-3 mb-8 leading-tight">Un savoir-faire artisanal au service de l'excellence</h2>
+                    <div class="space-y-6 text-dark/70 leading-relaxed">
+                        <p>Fondée au cœur de la Tunisie, <strong class="text-dark">Maison Shim</strong> est née d'une passion profonde pour la pâtisserie française et d'un désir de proposer des créations d'exception dans un cadre chaleureux et raffiné.</p>
+                        <p>Chaque jour, nos artisans pâtissiers sélectionnent avec soin les meilleurs ingrédients — beurre AOP, vanille de Madagascar, chocolat grand cru — pour élaborer des pièces uniques qui allient tradition et modernité.</p>
+                        <p>De l'entremet à la tarte, en passant par les viennoiseries, chaque création est le fruit d'un travail minutieux et d'une attention constante aux détails.</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-dark/10">
+                        <div class="text-center">
+                            <span class="font-heading text-3xl font-bold text-gold">100%</span>
+                            <p class="text-sm text-dark/50 mt-1">Artisanal</p>
+                        </div>
+                        <div class="text-center">
+                            <span class="font-heading text-3xl font-bold text-gold">Premium</span>
+                            <p class="text-sm text-dark/50 mt-1">Ingrédients</p>
+                        </div>
+                        <div class="text-center">
+                            <span class="font-heading text-3xl font-bold text-gold">Fait</span>
+                            <p class="text-sm text-dark/50 mt-1">Maison</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in order-1 lg:order-2">
+                    <div class="relative">
+                        <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1bd8c0ca9-4bb4-4d8b-80e8-ac3847991e1e.png" alt="Artisan pâtissier" class="w-full rounded-2xl shadow-2xl">
+                        <div class="absolute -bottom-6 -left-6 w-48 h-48 bg-cream rounded-2xl -z-10 hidden md:block"></div>
+                        <div class="absolute -top-6 -right-6 w-32 h-32 border-2 border-gold/30 rounded-2xl hidden md:block"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider max-w-xs mx-auto"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-28 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-gold text-sm tracking-[0.3em] uppercase">Contactez-nous</span>
+                <h2 class="font-heading text-3xl md:text-4xl font-semibold mt-3 mb-4">Nous Rendre Visite</h2>
+                <p class="text-dark/60 max-w-xl mx-auto">Venez découvrir notre univers pâtissier ou contactez-nous pour toute commande spéciale.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info & Form -->
+                <div class="fade-in">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
+                        <h3 class="font-heading text-xl font-semibold mb-6">Informations</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-cream flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-dark">Adresse</p>
+                                    <p class="text-dark/60 text-sm">Monastir, Hay Riadh 10, Tunisie</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-cream flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-dark">Téléphone</p>
+                                    <p class="text-dark/60 text-sm">+216 50 649 616</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-cream flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-dark">Horaires d'ouverture</p>
+                                    <p class="text-dark/60 text-sm">Lundi - Samedi : 8h00 - 20h00</p>
+                                    <p class="text-dark/60 text-sm">Dimanche : 9h00 - 18h00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-white rounded-2xl p-8 shadow-lg">
+                        <h3 class="font-heading text-xl font-semibold mb-6">Envoyez-nous un message</h3>
+                        <form onsubmit="handleContactForm(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-dark/70 mb-1">Nom complet</label>
+                                    <input type="text" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="Votre nom">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-dark/70 mb-1">Email</label>
+                                    <input type="email" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="votre@email.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-dark/70 mb-1">Sujet</label>
+                                <input type="text" class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="Objet de votre message">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-dark/70 mb-1">Message</label>
+                                <textarea rows="4" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm resize-none" placeholder="Votre message..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-gold w-full text-white py-3.5 rounded-lg text-sm tracking-wider uppercase font-medium">
+                                Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="fade-in">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg h-full min-h-[500px]">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d404.6518378136101!2d10.810942817877345!3d35.770102000000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130213006b11de63%3A0x2039df48dc64d2a3!2sMaison%20S&#39;him!5e0!3m2!1sfr!2stn!4v1776525451570!5m2!1sfr!2stn" width="100%" height="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="mt-8 flex justify-center gap-4">
+                        <a href="https://www.instagram.com/maison_shim" target="_blank" class="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all hover:-translate-y-1">
+                            <svg class="w-5 h-5 text-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/maison.shim" target="_blank" class="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all hover:-translate-y-1">
+                            <svg class="w-5 h-5 text-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://wa.me/21650649616" target="_blank" class="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all hover:-translate-y-1">
+                            <svg class="w-5 h-5 text-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
+                            <span class="font-heading text-white font-bold text-lg">M</span>
+                        </div>
+                        <span class="font-heading text-xl font-semibold">Maison Shim</span>
+                    </div>
+                    <p class="text-white/50 text-sm leading-relaxed">Haute pâtisserie artisanale au cœur de la Tunisie. Des créations d'exception pour sublimer vos moments.</p>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg font-semibold mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-white/50 text-sm">
+                        <li><a href="#accueil" class="hover:text-gold transition-colors">Accueil</a></li>
+                        <li><a href="#produits" class="hover:text-gold transition-colors">Nos Produits</a></li>
+                        <li><a href="#histoire" class="hover:text-gold transition-colors">Notre Histoire</a></li>
+                        <li><a href="#contact" class="hover:text-gold transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg font-semibold mb-4">Horaires</h4>
+                    <ul class="space-y-2 text-white/50 text-sm">
+                        <li>Lundi - Samedi : 8h00 - 20h00</li>
+                        <li>Dimanche : 9h00 - 18h00</li>
+                    </ul>
+                    <div class="mt-6">
+                        <a href="https://www.instagram.com/maison_shim" target="_blank" class="text-gold text-sm hover:text-gold-light transition-colors">@maison_shim</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/30 text-sm">© 2026 Maison Shim. Tous droits réservés.</p>
+                <p class="text-white/30 text-sm">Artisan Pâtissier — Tunis, Tunisie</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/21650649616" target="_blank" class="whatsapp-float" title="Contactez-nous sur WhatsApp">
+        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="modal-overlay absolute inset-0" onclick="closeCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-cream shadow-2xl transform transition-transform duration-300 translate-x-full" id="cart-panel">
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between p-6 border-b border-dark/10">
+                    <h3 class="font-heading text-xl font-semibold">Votre Panier</h3>
+                    <button onclick="closeCart()" class="p-2 hover:bg-dark/5 rounded-full transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+                    <p class="text-dark/40 text-center py-12">Votre panier est vide</p>
+                </div>
+                <div id="cart-footer" class="p-6 border-t border-dark/10 hidden">
+                    <button onclick="openClickCollect()" class="btn-gold w-full text-white py-3.5 rounded-lg text-sm tracking-wider uppercase font-medium">
+                        Commander via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Click & Collect Modal -->
+    <div id="click-collect-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4">
+        <div class="modal-overlay absolute inset-0" onclick="closeClickCollect()"></div>
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-8">
+            <button onclick="closeClickCollect()" class="absolute top-4 right-4 p-2 hover:bg-dark/5 rounded-full transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <h3 class="font-heading text-2xl font-semibold mb-2">Click & Collect</h3>
+            <p class="text-dark/60 text-sm mb-6">Passez votre commande et récupérez-la en boutique</p>
+            <form onsubmit="submitClickCollect(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-dark/70 mb-1">Nom complet *</label>
+                    <input type="text" id="cc-name" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="Votre nom complet">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-dark/70 mb-1">Articles commandés</label>
+                    <div id="cc-items" class="space-y-2 max-h-40 overflow-y-auto p-3 bg-cream/50 rounded-lg">
+                        <!-- Cart items will be shown here -->
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-dark/70 mb-1">Heure de retrait souhaitée *</label>
+                    <input type="time" id="cc-time" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-dark/70 mb-1">Notes supplémentaires</label>
+                    <textarea id="cc-notes" rows="3" class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm resize-none" placeholder="Allergies, préférences..."></textarea>
+                </div>
+                <button type="submit" class="btn-gold w-full text-white py-3.5 rounded-lg text-sm tracking-wider uppercase font-medium flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Envoyer via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="fixed inset-0 z-[80] hidden flex items-center justify-center p-4">
+        <div class="admin-login-overlay absolute inset-0" onclick="closeAdminLogin()"></div>
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8">
+            <button onclick="closeAdminLogin()" class="absolute top-4 right-4 p-2 hover:bg-dark/5 rounded-full transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-full gold-gradient flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <h3 class="font-heading text-xl font-semibold">Accès Administration</h3>
+                <p class="text-dark/50 text-sm mt-1">Mot de passe requis</p>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <input type="password" id="admin-password" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm text-center" placeholder="Mot de passe">
+                <button type="submit" class="btn-gold w-full text-white py-3 rounded-lg text-sm tracking-wider uppercase font-medium">
+                    Accéder
+                </button>
+            </form>
+            <p class="text-dark/30 text-xs text-center mt-4">Contactez le développeur pour obtenir le mot de passe</p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="fixed inset-0 z-[75] hidden">
+        <div class="bg-cream h-full overflow-y-auto">
+            <!-- Admin Header -->
+            <div class="bg-dark text-white sticky top-0 z-10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full gold-gradient flex items-center justify-center">
+                                <span class="font-heading text-white font-bold text-sm">M</span>
+                            </div>
+                            <span class="font-heading text-lg font-semibold">Dashboard Admin</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button onclick="closeAdminDashboard()" class="px-4 py-2 text-sm text-white/60 hover:text-white transition-colors">
+                                Voir le site
+                            </button>
+                            <button onclick="adminLogout()" class="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
+                                Déconnexion
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Content -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="mb-8">
+                    <h2 class="font-heading text-2xl font-semibold mb-2">Gestion des Produits</h2>
+                    <p class="text-dark/50 text-sm">Modifiez les images, prix et descriptions de vos produits. Les changements sont appliqués instantanément sur le site.</p>
+                </div>
+
+                <!-- Products Admin Table -->
+                <div class="space-y-4" id="admin-products-list">
+                    <!-- Admin product cards will be rendered by JS -->
+                </div>
+
+                <!-- Add Product Button -->
+                <div class="mt-8 text-center">
+                    <button onclick="addNewProduct()" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-dashed border-gold/40 text-gold rounded-lg hover:bg-gold/5 transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        Ajouter un produit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-[90] bg-dark text-white px-6 py-3 rounded-full shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none text-sm">
+        <span id="toast-message"></span>
+    </div>
+
+    <script>
+        // ============================================
+        // DATA - Products
+        // ============================================
+        const defaultProducts = [
+            {
+                id: 1,
+                name: "Entremet Framboise",
+                description: "Mousse framboise, insert coulant, biscuit amande",
+                price: 18,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png",
+                category: "entremets"
+            },
+            {
+                id: 2,
+                name: "Mille-Feuille Classique",
+                description: "Pâte feuilletée caramélisée, crème vanille, fondant",
+                price: 12,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d4ae7ac4-578a-464a-bd09-b96415f06cea.png",
+                category: "entremets"
+            },
+            {
+                id: 3,
+                name: "Dôme Chocolat",
+                description: "Ganache chocolat noir, croustillant praliné, biscuit cacao",
+                price: 16,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d97cd048-e131-440b-b0eb-d128e8938ef8.png",
+                category: "entremets"
+            },
+            {
+                id: 4,
+                name: "Croissant Pur Beurre",
+                description: "Pâte feuilletée artisanale, beurre AOP, dorure à l'œuf",
+                price: 5,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1b613cce1-a48a-4e97-b99b-d02cecfe5369.png",
+                category: "viennoiseries"
+            },
+            {
+                id: 5,
+                name: "Tarte aux Fruits",
+                description: "Pâte sablée, crème pâtissière, fruits frais de saison",
+                price: 14,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/10f3fa9a1-71d3-4b4e-921c-4e4e9b5ba49e.png",
+                category: "gateaux"
+            },
+            {
+                id: 6,
+                name: "Coffret Macarons (12)",
+                description: "Assortiment de 12 macarons, parfums variés",
+                price: 24,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1124d5197-4c9f-4e2c-b774-7a1bac2077cd.png",
+                category: "macarons"
+            },
+            {
+                id: 7,
+                name: "Éclair au Chocolat",
+                description: "Pâte à choux, crème pâtissière chocolat, glaçage fondant",
+                price: 8,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13a383592-be6b-4354-94dc-465fc4045268.png",
+                category: "viennoiseries"
+            },
+            {
+                id: 8,
+                name: "Assortiment Mignardises",
+                description: "Sélection de mini-pâtisseries pour un tea time raffiné",
+                price: 32,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/19521578b-e849-4b90-86a9-b834b295572b.png",
+                category: "gateaux"
+            },
+            {
+                id: 9,
+                name: "Cake au Citron",
+                description: "Cake moelleux au citron de Sicile, glaçage au sucre",
+                price: 15,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/19521578b-e849-4b90-86a9-b834b295572b.png",
+                category: "gateaux"
+            }
+        ];
+
+        // ============================================
+        // STATE
+        // ============================================
+        let products = JSON.parse(localStorage.getItem('maisonShimProducts')) || [...defaultProducts];
+        let cart = [];
+        let isAdminLoggedIn = false;
+        const ADMIN_PASSWORD = 'maisonshim2026';
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            renderAdminProducts();
+            initScrollAnimations();
+            initNavbarScroll();
+        });
+
+        // ============================================
+        // NAVBAR
+        // ============================================
+        function initNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
+                    navbar.querySelector('a').classList.remove('text-white');
+                } else {
+                    navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('open');
+            const spans = document.querySelectorAll('#hamburger span');
+            if (menu.classList.contains('open')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
+            }
+        }
+
+        // ============================================
+        // SCROLL ANIMATIONS
+        // ============================================
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        }
+
+        // ============================================
+        // PRODUCTS RENDERING
+        // ============================================
+        function renderProducts(category = 'all') {
+            const grid = document.getElementById('products-grid');
+            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 fade-in visible" data-category="${product.category}">
+                    <div class="relative overflow-hidden aspect-[4/3]">
+                        <img src="${product.image}" alt="${product.name}" class="product-img w-full h-full object-cover transition-transform duration-700" id="product-img-${product.id}">
+                        <div class="absolute top-3 right-3">
+                            <button onclick="addToCart(${product.id})" class="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-all shadow-sm">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-start justify-between mb-2">
+                            <h3 class="font-heading text-lg font-semibold" id="product-name-${product.id}">${product.name}</h3>
+                            <span class="text-gold font-heading text-lg font-bold" id="product-price-${product.id}">${product.price} DT</span>
+                        </div>
+                        <p class="text-dark/50 text-sm leading-relaxed mb-4" id="product-desc-${product.id}">${product.description}</p>
+                        <button onclick="orderViaWhatsApp(${product.id})" class="product-order-btn w-full py-2.5 rounded-lg text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-[#25D366] hover:text-[#25D366] transition-all flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            Commander
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProducts(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.category === category) btn.classList.add('active');
+            });
+            renderProducts(category);
+        }
+
+        // ============================================
+        // CART
+        // ============================================
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`${product.name} ajouté au panier`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+            renderCartItems();
+        }
+
+        function updateCartQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            updateCartUI();
+            renderCartItems();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            if (totalItems > 0) {
+                countEl.textContent = totalItems;
+                countEl.classList.remove('hidden');
+                countEl.classList.add('cart-badge');
+                setTimeout(() => countEl.classList.remove('cart-badge'), 300);
+            } else {
+                countEl.classList.add('hidden');
+            }
+        }
+
+        function openCart() {
+            const modal = document.getElementById('cart-modal');
+            const panel = document.getElementById('cart-panel');
+            modal.classList.remove('hidden');
+            renderCartItems();
+            setTimeout(() => {
+                panel.style.transform = 'translateX(0)';
+            }, 10);
+        }
+
+        function closeCart() {
+            const panel = document.getElementById('cart-panel');
+            panel.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.getElementById('cart-modal').classList.add('hidden');
+            }, 300);
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cart-items');
+            const footer = document.getElementById('cart-footer');
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-dark/40 text-center py-12">Votre panier est vide</p>';
+                footer.classList.add('hidden');
+                return;
+            }
+
+            footer.classList.remove('hidden');
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-4 py-3 border-b border-dark/5">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-sm">${item.name}</h4>
+                        <p class="text-gold text-sm font-medium">${item.price} DT</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateCartQuantity(${item.id}, -1)" class="w-7 h-7 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark/5 text-sm">-</button>
+                        <span class="w-6 text-center text-sm font-medium">${item.quantity}</span>
+                        <button onclick="updateCartQuantity(${item.id}, 1)" class="w-7 h-7 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark/5 text-sm">+</button>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="p-1 text-dark/30 hover:text-red-500 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // ============================================
+        // WHATSAPP ORDERING
+        // ============================================
+        function orderViaWhatsApp(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const message = encodeURIComponent(
+                `🍰 Nouvelle commande Click & Collect - Maison Shim\n\n` +
+                `Article : ${product.name}\n` +
+                `Prix : ${product.price} DT\n\n` +
+                `Merci de me confirmer la disponibilité !`
+            );
+
+            window.open(`https://wa.me/21650649616?text=${message}`, '_blank');
+        }
+
+        function openClickCollect() {
+            closeCart();
+            const modal = document.getElementById('click-collect-modal');
+            modal.classList.remove('hidden');
+
+            const itemsContainer = document.getElementById('cc-items');
+            itemsContainer.innerHTML = cart.map(item => `
+                <div class="flex justify-between items-center text-sm">
+                    <span>${item.name} × ${item.quantity}</span>
+                    <span class="font-medium">${item.price * item.quantity} DT</span>
+                </div>
+            `).join('');
+        }
+
+        function closeClickCollect() {
+            document.getElementById('click-collect-modal').classList.add('hidden');
+        }
+
+        function submitClickCollect(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('cc-name').value;
+            const time = document.getElementById('cc-time').value;
+            const notes = document.getElementById('cc-notes').value;
+
+            const itemsList = cart.map(item => `${item.name} × ${item.quantity} (${item.price * item.quantity} DT)`).join('\n');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            const message = encodeURIComponent(
+                ` *Nouvelle commande Click & Collect* - Maison Shim\n\n` +
+                ` Nom : ${name}\n` +
+                `🕐 Heure de retrait : ${time}\n\n` +
+                `📦 Articles :\n${itemsList}\n\n` +
+                `💰 Total : ${total} DT\n` +
+                `${notes ? `📝 Notes : ${notes}\n` : ''}` +
+                `\nMerci de confirmer ma commande !`
+            );
+
+            window.open(`https://wa.me/21650649616?text=${message}`, '_blank');
+            closeClickCollect();
+            cart = [];
+            updateCartUI();
+            showToast('Commande envoyée via WhatsApp !');
+        }
+
+        // ============================================
+        // CONTACT FORM
+        // ============================================
+        function handleContactForm(e) {
+            e.preventDefault();
+            showToast('Message envoyé avec succès !');
+            e.target.reset();
+        }
+
+        // ============================================
+        // ADMIN
+        // ============================================
+        function openAdminLogin() {
+            document.getElementById('admin-login-modal').classList.remove('hidden');
+            document.getElementById('admin-password').focus();
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            if (password === 'ADMIN_PASSWORD') {
+                isAdminLoggedIn = true;
+                closeAdminLogin();
+                openAdminDashboard();
+                document.getElementById('admin-password').value = '';
+            } else {
+                showToast('Mot de passe incorrect');
+            }
+        }
+
+        function adminLogout() {
+            isAdminLoggedIn = false;
+            closeAdminDashboard();
+            showToast('Déconnexion réussie');
+        }
+
+        function openAdminDashboard() {
+            document.getElementById('admin-dashboard').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            renderAdminProducts();
+        }
+
+        function closeAdminDashboard() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.body.style.overflow = '';
+            renderProducts();
+        }
+
+        function renderAdminProducts() {
+            const container = document.getElementById('admin-products-list');
+            container.innerHTML = products.map(product => `
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-dark/5" id="admin-product-${product.id}">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <!-- Image -->
+                        <div class="w-full md:w-48 flex-shrink-0">
+                            <div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-cream">
+                                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" id="admin-img-${product.id}">
+                            </div>
+                            <div class="mt-2">
+                                <label class="text-xs text-dark/50 mb-1 block">Image du produit</label>
+                                <input type="url" value="${product.image}" onchange="updateProductImage(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-xs outline-none" placeholder="URL de l'image">
+                            </div>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="flex-1 space-y-4">
+                            <div class="flex flex-wrap gap-4">
+                                <div class="flex-1 min-w-[200px]">
+                                    <label class="text-xs text-dark/50 mb-1 block">Nom du produit</label>
+                                    <input type="text" value="${product.name}" onchange="updateProductName(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none font-medium" id="admin-name-${product.id}">
+                                </div>
+                                <div class="w-32">
+                                    <label class="text-xs text-dark/50 mb-1 block">Prix (DT)</label>
+                                    <input type="number" value="${product.price}" onchange="updateProductPrice(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none font-bold text-gold" id="admin-price-${product.id}">
+                                </div>
+                                <div class="w-40">
+                                    <label class="text-xs text-dark/50 mb-1 block">Catégorie</label>
+                                    <select onchange="updateProductCategory(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none">
+                                        <option value="entremets" ${product.category === 'entremets' ? 'selected' : ''}>Entremets</option>
+                                        <option value="gateaux" ${product.category === 'gateaux' ? 'selected' : ''}>Gâteaux de Voyage</option>
+                                        <option value="viennoiseries" ${product.category === 'viennoiseries' ? 'selected' : ''}>Viennoiseries</option>
+                                        <option value="macarons" ${product.category === 'macarons' ? 'selected' : ''}>Macarons</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-xs text-dark/50 mb-1 block">Description courte</label>
+                                <input type="text" value="${product.description}" onchange="updateProductDesc(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none" id="admin-desc-${product.id}">
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="deleteProduct(${product.id})" class="px-4 py-2 text-xs text-red-500 border border-red-200 rounded-lg hover:bg-red-50 transition-colors">
+                                    Supprimer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateProductImage(id, url) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                product.image = url;
+                saveProducts();
+                document.getElementById(`admin-img-${id}`).src = url;
+                showToast('Image mise à jour');
+            }
+        }
+
+        function updateProductName(id, name) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                product.name = name;
+                saveProducts();
+                document.getElementById(`product-name-${id}`).textContent = name;
+                showToast('Nom mis à jour');
+            }
+        }
+
+        function updateProductPrice(id, price) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                product.price = parseFloat(price) || 0;
+                saveProducts();
+                const priceEl = document.getElementById(`product-price-${id}`);
+                if (priceEl) priceEl.textContent = `${product.price} DT`;
+                showToast('Prix mis à jour');
+            }
+        }
+
+        function updateProductDesc(id, desc) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                product.description = desc;
+                saveProducts();
+                const descEl = document.getElementById(`product-desc-${id}`);
+                if (descEl) descEl.textContent = desc;
+                showToast('Description mise à jour');
+            }
+        }
+
+        function updateProductCategory(id, category) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                product.category = category;
+                saveProducts();
+                showToast('Catégorie mise à jour');
+            }
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
+                products = products.filter(p => p.id !== id);
+                saveProducts();
+                renderAdminProducts();
+                renderProducts();
+                showToast('Produit supprimé');
+            }
+        }
+
+        function addNewProduct() {
+            const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+            products.push({
+                id: newId,
+                name: "Nouveau Produit",
+                description: "Description du produit",
+                price: 10,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png",
+                category: "entremets"
+            });
+            saveProducts();
+            renderAdminProducts();
+            renderProducts();
+            showToast('Nouveau produit ajouté');
+
+            // Scroll to the new product
+            setTimeout(() => {
+                const el = document.getElementById(`admin-product-${newId}`);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        function saveProducts() {
+            localStorage.setItem('maisonShimProducts', JSON.stringify(products));
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            msgEl.textContent = message;
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.transform = 'translateY(20px)';
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+
+        // ============================================
+        // PARALLAX
+        // ============================================
+        window.addEventListener('scroll', () => {
+            const heroImg = document.getElementById('hero-img');
+            if (heroImg) {
+                const scrolled = window.scrollY;
+                heroImg.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
+
