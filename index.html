@@ -270,6 +270,10 @@
                 </div>
 
                 <!-- Mobile Menu Button -->
+                <button onclick="openCart()" class="relative p-2 hover:bg-dark/5 rounded-full transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 gold-gradient text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
                 <button onclick="toggleMobileMenu()" class="md:hidden p-2 z-50">
                     <div id="hamburger" class="w-6 h-5 relative">
                         <span class="absolute left-0 top-0 w-6 h-0.5 bg-dark transition-all duration-300"></span>
@@ -288,12 +292,7 @@
                 <a href="#produits" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Nos Produits</a>
                 <a href="#histoire" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Notre Histoire</a>
                 <a href="#contact" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Contact</a>
-                <button onclick="openAdminLogin()" class="text-left text-sm tracking-wider uppercase text-dark/40 hover:text-gold transition-colors pt-4">
-                <button onclick="openCart()" class="relative p-2 hover:bg-dark/5 rounded-full transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                        <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 gold-gradient text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span>
-                    </button>    
-                    Administration
+                <button onclick="openAdminLogin()" class="text-left text-sm tracking-wider uppercase text-dark/40 hover:text-gold transition-colors pt-4"> Administration
                 </button>
             </div>
         </div>
