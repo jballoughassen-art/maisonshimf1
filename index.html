@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Shim | Haute Pâtisserie Artisanale</title>
+    <title>Maison S'him | L'art du goût tunisien</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -123,6 +123,11 @@
             color: white;
         }
 
+        .admin-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(245,240,235,0.95);
+        }
+
         .social-float-group {
             position: fixed;
             bottom: 24px;
@@ -214,372 +219,84 @@
             backdrop-filter: blur(10px);
         }
 
-        /* ============================================
-           NEW HEADER STRUCTURE - Mobile & Desktop
-           ============================================ */
-
-        .header-wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 50;
-            transition: all 0.5s ease;
-        }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 72px;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 16px;
-        }
-
-        @media (min-width: 640px) {
-            .header-inner {
-                padding: 0 24px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .header-inner {
-                padding: 0 32px;
-            }
-        }
-
-        /* Logo - toujours à gauche */
-        .header-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        /* Actions group (Panier + Burger) - toujours à droite */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
-        @media (min-width: 640px) {
-            .header-actions {
-                gap: 8px;
-            }
-        }
-
-        /* Panier - visible sur TOUS les écrans */
-        .mobile-cart-btn {
-            position: relative;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .mobile-cart-btn:hover {
-            background: rgba(26, 26, 26, 0.06);
-        }
-
-        .mobile-cart-btn svg {
-            width: 22px;
-            height: 22px;
-            transition: color 0.3s ease;
-        }
-
-        /* Badge du panier - pastille rouge */
-        .cart-count-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            min-width: 18px;
-            height: 18px;
-            padding: 0 4px;
-            background: #EF4444;
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            line-height: 18px;
-            text-align: center;
-            border-radius: 9999px;
-            transform: scale(1);
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.4);
-        }
-
-        .cart-count-badge.hidden-badge {
-            transform: scale(0);
-            opacity: 0;
-        }
-
-        .cart-count-badge.cart-badge {
-            animation: pulse-badge 0.3s ease;
-        }
-
-        @keyframes pulse-badge {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4); }
-            100% { transform: scale(1); }
-        }
-
-        /* Hamburger - visible uniquement sur mobile */
-        .mobile-burger-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-        }
-
-        @media (min-width: 1024px) {
-            .mobile-burger-btn {
-                display: none;
-            }
-        }
-
-        .mobile-burger-btn span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: currentColor;
-            transition: all 0.3s ease;
-            position: absolute;
-        }
-
-        .mobile-burger-btn span:nth-child(1) { transform: translateY(-7px); }
-        .mobile-burger-btn span:nth-child(2) { opacity: 1; }
-        .mobile-burger-btn span:nth-child(3) { transform: translateY(7px); }
-
-        .mobile-burger-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translateY(0);
-        }
-        .mobile-burger-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .mobile-burger-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translateY(0);
-        }
-
-        /* Navigation desktop - cachée sur mobile */
-        .desktop-nav {
-            display: none;
-        }
-
-        @media (min-width: 1024px) {
-            .desktop-nav {
-                display: flex;
-                align-items: center;
-                gap: 32px;
-            }
-
-            /* Sur desktop, le panier fait partie de la nav */
-            .desktop-nav .nav-cart-wrapper {
-                display: flex;
-                align-items: center;
-                gap: 16px;
-            }
-        }
-
-        /* Mobile menu - slide from right */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 280px;
-            height: 100vh;
-            background: #F5F0EB;
-            box-shadow: -8px 0 30px rgba(0,0,0,0.15);
-            z-index: 40;
-            padding: 88px 32px 32px;
-            transform: translateX(100%);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
-
-        .mobile-menu-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.4);
-            z-index: 35;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .mobile-menu-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* Header scroll state */
-        .header-wrapper.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-        }
-
-        .header-wrapper.scrolled .header-logo,
-        .header-wrapper.scrolled .mobile-cart-btn,
-        .header-wrapper.scrolled .mobile-burger-btn,
-        .header-wrapper.scrolled .desktop-nav a {
-            color: #1A1A1A;
-        }
-
-        @media (max-width: 1023px) {
-            .header-wrapper:not(.scrolled) .header-logo,
-            .header-wrapper:not(.scrolled) .mobile-cart-btn,
-            .header-wrapper:not(.scrolled) .mobile-burger-btn {
-                color: white;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .header-wrapper.scrolled .desktop-nav a {
-                color: rgba(26,26,26,0.8);
-            }
-            .header-wrapper:not(.scrolled) .desktop-nav a {
-                color: rgba(255,255,255,0.8);
-            }
-        }
-
-        /* Cart Modal */
-        .cart-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 60;
-            display: none;
-        }
-
-        .cart-modal.open {
-            display: block;
-        }
-
-        .cart-modal-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-        }
-
-        .cart-panel {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            background: #F5F0EB;
-            box-shadow: -8px 0 40px rgba(0,0,0,0.15);
-            transform: translateX(100%);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-panel.open {
-            transform: translateX(0);
-        }
-
-        /* Mobile cart padding below floating buttons */
         @media (max-width: 768px) {
-            .cart-panel {
-                max-width: 100%;
+            .mobile-menu {
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
             }
-        }
-
-        /* Admin styles */
-        .admin-login-overlay {
-            background: rgba(26,26,26,0.9);
-            backdrop-filter: blur(10px);
+            .mobile-menu.open {
+                transform: translateX(0);
+            }
+            .social-float-group {
+                bottom: 16px;
+                right: 16px;
+                gap: 10px;
+            }
+            .social-float-btn {
+                width: 50px;
+                height: 50px;
+            }
         }
     </style>
 </head>
 <body class="bg-cream text-dark overflow-x-hidden">
 
-    <!-- ============================================
-         NEW HEADER STRUCTURE
-         Logo à gauche | Actions (Panier + Burger) à droite
-         ============================================ -->
-    <header id="header-wrapper" class="header-wrapper">
-        <div class="header-inner">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#accueil" class="flex items-center space-x-2 z-50">
+                    <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
+                        <span class="font-heading text-white font-bold text-lg">M</span>
+                    </div>
+                    <span class="font-heading text-xl font-semibold tracking-wide">Maison Shim</span>
+                </a>
 
-            <!-- LOGO - Gauche -->
-            <a href="#accueil" class="header-logo">
-                <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
-                    <span class="font-heading text-white font-bold text-lg">M</span>
-                </div>
-                <span class="font-heading text-xl font-semibold tracking-wide">Maison Shim</span>
-            </a>
-
-            <!-- NAVIGATION DESKTOP - Centre (visible >= lg) -->
-            <nav class="desktop-nav">
-                <a href="#accueil" class="nav-link text-sm tracking-wider uppercase transition-colors">Accueil</a>
-                <a href="#instagram" class="nav-link text-sm tracking-wider uppercase transition-colors">Instagram</a>
-                <a href="#produits" class="nav-link text-sm tracking-wider uppercase transition-colors">Nos Produits</a>
-                <a href="#histoire" class="nav-link text-sm tracking-wider uppercase transition-colors">Notre Histoire</a>
-                <a href="#contact" class="nav-link text-sm tracking-wider uppercase transition-colors">Contact</a>
-                <div class="nav-cart-wrapper">
-                    <button onclick="openAdminLogin()" class="text-xs tracking-wider uppercase transition-colors" style="color: inherit; opacity: 0.4;">
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#accueil" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Accueil</a>
+                    <a href="#instagram" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Instagram</a>
+                    <a href="#produits" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Nos Produits</a>
+                    <a href="#histoire" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Notre Histoire</a>
+                    <a href="#contact" class="nav-link text-sm tracking-wider uppercase text-dark/80 hover:text-dark transition-colors">Contact</a>
+                    <button onclick="openAdminLogin()" class="text-xs tracking-wider uppercase text-dark/40 hover:text-gold transition-colors">
                         <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                     </button>
-                    <button onclick="openCart()" class="relative p-2 hover:bg-dark/5 rounded-full transition-colors" style="color: inherit;">
+                    <button onclick="openCart()" class="relative p-2 hover:bg-dark/5 rounded-full transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                        <span id="cart-count-desktop" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center font-bold hidden-badge">0</span>
+                        <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 gold-gradient text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span>
                     </button>
                 </div>
-            </nav>
 
-            <!-- ACTIONS MOBILE - Droite (Panier + Burger) -->
-            <div class="header-actions">
-                <!-- Panier mobile - TOUJOURS VISIBLE -->
-                <button onclick="openCart()" class="mobile-cart-btn" aria-label="Ouvrir le panier" title="Panier">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                    <span id="cart-count-mobile" class="cart-count-badge hidden-badge">0</span>
+                <!-- Mobile Menu Button -->
+                <button onclick="openCart()" class="relative p-2 hover:bg-dark/5 rounded-full transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 gold-gradient text-white text-xs rounded-full flex items-center justify-center font-bold hidden">0</span>
                 </button>
-
-                <!-- Burger mobile - visible uniquement sur mobile (< lg) -->
-                <button onclick="toggleMobileMenu()" class="mobile-burger-btn" aria-label="Menu" id="burger-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 z-50">
+                    <div id="hamburger" class="w-6 h-5 relative">
+                        <span class="absolute left-0 top-0 w-6 h-0.5 bg-dark transition-all duration-300"></span>
+                        <span class="absolute left-0 top-2 w-6 h-0.5 bg-dark transition-all duration-300"></span>
+                        <span class="absolute left-0 top-4 w-6 h-0.5 bg-dark transition-all duration-300"></span>
+                    </div>
                 </button>
             </div>
         </div>
-    </header>
 
-    <!-- Overlay menu mobile -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
-        <div class="flex flex-col space-y-1">
-            <a href="#accueil" onclick="toggleMobileMenu()" class="block py-3 text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10">Accueil</a>
-            <a href="#instagram" onclick="toggleMobileMenu()" class="block py-3 text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10">Instagram</a>
-            <a href="#produits" onclick="toggleMobileMenu()" class="block py-3 text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10">Nos Produits</a>
-            <a href="#histoire" onclick="toggleMobileMenu()" class="block py-3 text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10">Notre Histoire</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block py-3 text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10">Contact</a>
-            <button onclick="openAdminLogin(); toggleMobileMenu();" class="block py-4 text-sm tracking-wider uppercase text-dark/30 hover:text-gold transition-colors text-left mt-2">
-                Administration
-            </button>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-screen w-72 bg-cream shadow-2xl md:hidden z-40 pt-24 px-8">
+            <div class="flex flex-col space-y-6">
+                <a href="#accueil" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Accueil</a>
+                <a href="#instagram" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Instagram</a>
+                <a href="#produits" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Nos Produits</a>
+                <a href="#histoire" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Notre Histoire</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-lg tracking-wider uppercase text-dark/80 hover:text-gold transition-colors border-b border-dark/10 pb-2">Contact</a>
+                <button onclick="openAdminLogin()" class="text-left text-sm tracking-wider uppercase text-dark/40 hover:text-gold transition-colors pt-4"> Administration
+                </button>
+            </div>
         </div>
-    </div>
+    </nav>
 
     <!-- Hero Section -->
     <section id="accueil" class="relative h-screen flex items-center justify-center overflow-hidden">
@@ -591,8 +308,8 @@
             <div class="mb-6">
                 <span class="inline-block text-gold-light text-sm tracking-[0.3em] uppercase font-light mb-4">Pâtisserie Artisanale</span>
                 <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-bold leading-tight mb-6">
-                    L'art de la<br>
-                    <span class="text-gold-gradient">haute pâtisserie</span>
+                    L'art du<br>
+                    <span class="text-gold-gradient">goût tunisien</span>
                 </h1>
             </div>
             <p class="text-white/80 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -625,6 +342,7 @@
                 </a>
             </div>
 
+            <!-- Instagram Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 max-w-5xl mx-auto">
                 <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
                     <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png" alt="Instagram post 1" class="w-full h-full object-cover">
@@ -662,6 +380,24 @@
                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </div>
                 </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1bd8c0ca9-4bb4-4d8b-80e8-ac3847991e1e.png" alt="Instagram post 7" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1124d5197-4c9f-4e2c-b774-7a1bac2077cd.png" alt="Instagram post 8" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/maison_shim" target="_blank" class="insta-grid-item relative aspect-square overflow-hidden rounded-lg group">
+                    <img src="https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13a383592-be6b-4354-94dc-465fc4045268.png" alt="Instagram post 9" class="w-full h-full object-cover">
+                    <div class="insta-overlay absolute inset-0 bg-dark/40 flex items-center justify-center opacity-0 transition-opacity">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -677,6 +413,7 @@
                 <p class="text-dark/60 max-w-2xl mx-auto">Chaque pièce est un chef-d'œuvre, créé avec les meilleurs ingrédients et un savoir-faire d'exception.</p>
             </div>
 
+            <!-- Category Filters -->
             <div class="flex flex-wrap justify-center gap-3 mb-12 fade-in">
                 <button onclick="filterProducts('all')" class="category-btn active px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="all">Tout</button>
                 <button onclick="filterProducts('entremets')" class="category-btn px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="entremets">Entremets</button>
@@ -685,8 +422,9 @@
                 <button onclick="filterProducts('macarons')" class="category-btn px-6 py-2.5 rounded-full text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-gold transition-all" data-category="macarons">Macarons</button>
             </div>
 
+            <!-- Products Grid -->
             <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Products rendered by JS -->
+                <!-- Products will be rendered by JS -->
             </div>
         </div>
     </section>
@@ -701,9 +439,8 @@
                     <span class="text-gold text-sm tracking-[0.3em] uppercase">Notre Histoire</span>
                     <h2 class="font-heading text-3xl md:text-4xl font-semibold mt-3 mb-8 leading-tight">Un savoir-faire artisanal au service de l'excellence</h2>
                     <div class="space-y-6 text-dark/70 leading-relaxed">
-                        <p>Fondée au cœur de la Tunisie, <strong class="text-dark">Maison Shim</strong> est née d'une passion profonde pour la pâtisserie française et d'un désir de proposer des créations d'exception dans un cadre chaleureux et raffiné.</p>
-                        <p>Chaque jour, nos artisans pâtissiers sélectionnent avec soin les meilleurs ingrédients — beurre AOP, vanille de Madagascar, chocolat grand cru — pour élaborer des pièces uniques qui allient tradition et modernité.</p>
-                        <p>De l'entremet à la tarte, en passant par les viennoiseries, chaque création est le fruit d'un travail minutieux et d'une attention constante aux détails.</p>
+                        <p>Fondée au cœur de la Tunisie, <strong class="text-dark">Maison Shim</strong> est née d'une passion profonde pour la pâtisserie tunisienne et d'un désir de proposer des créations d'exception dans un cadre chaleureux et raffiné.</p>
+                        
                     </div>
                     <div class="grid grid-cols-3 gap-6 mt-10 pt-10 border-t border-dark/10">
                         <div class="text-center">
@@ -743,6 +480,7 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info & Form -->
                 <div class="fade-in">
                     <div class="bg-white rounded-2xl p-8 shadow-lg mb-8">
                         <h3 class="font-heading text-xl font-semibold mb-6">Informations</h3>
@@ -753,7 +491,7 @@
                                 </div>
                                 <div>
                                     <p class="font-medium text-dark">Adresse</p>
-                                    <p class="text-dark/60 text-sm">Centre Urbain Nord, Tunis, Tunisie</p>
+                                    <p class="text-dark/60 text-sm">Hay Riadh 10, Monastir, Tunisie</p>
                                 </div>
                             </div>
                             <div class="flex items-start gap-4">
@@ -770,14 +508,15 @@
                                     <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                 </div>
                                 <div>
-                                    <p class="font-medium text-dark">Horaires</p>
-                                    <p class="text-dark/60 text-sm">Lun - Sam : 8h00 - 20h00</p>
+                                    <p class="font-medium text-dark">Horaires d'ouverture</p>
+                                    <p class="text-dark/60 text-sm">Lundi - Samedi : 8h00 - 20h00</p>
                                     <p class="text-dark/60 text-sm">Dimanche : 9h00 - 18h00</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Contact Form -->
                     <div class="bg-white rounded-2xl p-8 shadow-lg">
                         <h3 class="font-heading text-xl font-semibold mb-6">Envoyez-nous un message</h3>
                         <form onsubmit="handleContactForm(event)" class="space-y-4">
@@ -787,13 +526,10 @@
                                     <input type="text" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="Votre nom">
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-dark/70 mb-1">Email</label>
-                                    <input type="email" required class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="votre@email.com">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-dark/70 mb-1">Sujet</label>
-                                <input type="text" class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="Objet de votre message">
+                                    
+          
+                                <label class="block text-sm font-medium text-dark/70 mb-1">Numero de Téléphone</label>
+                                <input type="text" class="input-field w-full px-4 py-3 rounded-lg border border-dark/15 bg-cream/50 text-dark placeholder-dark/30 outline-none text-sm" placeholder="+216 00 000 000">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-dark/70 mb-1">Message</label>
@@ -806,11 +542,13 @@
                     </div>
                 </div>
 
+                <!-- Map -->
                 <div class="fade-in">
                     <div class="bg-white rounded-2xl overflow-hidden shadow-lg h-full min-h-[500px]">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25528.24901434978!2d10.1654!3d36.8348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd32b0e0e5b2d7%3A0x6b0b0e0e0e0e0e0e!2sCentre%20Urbain%20Nord%2C%20Tunis!5e0!3m2!1sfr!2stn!4v1700000000000!5m2!1sfr!2stn" width="100%" height="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d404.6518378136101!2d10.810942817877345!3d35.770102000000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x130213006b11de63%3A0x2039df48dc64d2a3!2sMaison%20S&#39;him!5e0!3m2!1sfr!2stn!4v1776525451570!5m2!1sfr!2stn" width="100%" height="100%" style="border:0; min-height: 500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
 
+                    <!-- Social Links -->
                     <div class="mt-8 flex justify-center gap-4">
                         <a href="https://www.instagram.com/maison_shim" target="_blank" class="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center hover:shadow-lg transition-all hover:-translate-y-1">
                             <svg class="w-5 h-5 text-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -839,7 +577,7 @@
                         <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center">
                             <span class="font-heading text-white font-bold text-lg">M</span>
                         </div>
-                        <span class="font-heading text-xl font-semibold">Maison Shim</span>
+                        <span class="font-heading text-xl font-semibold">Maison S'him</span>
                     </div>
                     <p class="text-white/50 text-sm leading-relaxed">Haute pâtisserie artisanale au cœur de la Tunisie. Des créations d'exception pour sublimer vos moments.</p>
                 </div>
@@ -885,22 +623,24 @@
     </div>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="cart-modal">
-        <div class="cart-modal-overlay" onclick="closeCart()"></div>
-        <div class="cart-panel" id="cart-panel">
-            <div class="flex items-center justify-between p-6 border-b border-dark/10">
-                <h3 class="font-heading text-xl font-semibold">Votre Panier</h3>
-                <button onclick="closeCart()" class="p-2 hover:bg-dark/5 rounded-full transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
-            <div id="cart-items" class="flex-1 overflow-y-auto p-6">
-                <p class="text-dark/40 text-center py-12">Votre panier est vide</p>
-            </div>
-            <div id="cart-footer" class="p-6 border-t border-dark/10 hidden">
-                <button onclick="openClickCollect()" class="btn-gold w-full text-white py-3.5 rounded-lg text-sm tracking-wider uppercase font-medium">
-                    Commander via WhatsApp
-                </button>
+    <div id="cart-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="modal-overlay absolute inset-0" onclick="closeCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-cream shadow-2xl transform transition-transform duration-300 translate-x-full" id="cart-panel">
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between p-6 border-b border-dark/10">
+                    <h3 class="font-heading text-xl font-semibold">Votre Panier</h3>
+                    <button onclick="closeCart()" class="p-2 hover:bg-dark/5 rounded-full transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+                    <p class="text-dark/40 text-center py-12">Votre panier est vide</p>
+                </div>
+                <div id="cart-footer" class="p-6 border-t border-dark/10 hidden">
+                    <button onclick="openClickCollect()" class="btn-gold w-full text-white py-3.5 rounded-lg text-sm tracking-wider uppercase font-medium">
+                        Commander via WhatsApp
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -922,6 +662,7 @@
                 <div>
                     <label class="block text-sm font-medium text-dark/70 mb-1">Articles commandés</label>
                     <div id="cc-items" class="space-y-2 max-h-40 overflow-y-auto p-3 bg-cream/50 rounded-lg">
+                        <!-- Cart items will be shown here -->
                     </div>
                 </div>
                 <div>
@@ -967,6 +708,7 @@
     <!-- Admin Dashboard -->
     <div id="admin-dashboard" class="fixed inset-0 z-[75] hidden">
         <div class="bg-cream h-full overflow-y-auto">
+            <!-- Admin Header -->
             <div class="bg-dark text-white sticky top-0 z-10">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
                     <div class="flex items-center justify-between">
@@ -977,18 +719,30 @@
                             <span class="font-heading text-lg font-semibold">Dashboard Admin</span>
                         </div>
                         <div class="flex items-center gap-3">
-                            <button onclick="closeAdminDashboard()" class="px-4 py-2 text-sm text-white/60 hover:text-white transition-colors">Voir le site</button>
-                            <button onclick="adminLogout()" class="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-colors">Déconnexion</button>
+                            <button onclick="closeAdminDashboard()" class="px-4 py-2 text-sm text-white/60 hover:text-white transition-colors">
+                                Voir le site
+                            </button>
+                            <button onclick="adminLogout()" class="px-4 py-2 text-sm bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
+                                Déconnexion
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Admin Content -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div class="mb-8">
                     <h2 class="font-heading text-2xl font-semibold mb-2">Gestion des Produits</h2>
-                    <p class="text-dark/50 text-sm">Modifiez les images, prix et descriptions. Les changements sont instantanés.</p>
+                    <p class="text-dark/50 text-sm">Modifiez les images, prix et descriptions de vos produits. Les changements sont appliqués instantanément sur le site.</p>
                 </div>
-                <div class="space-y-4" id="admin-products-list"></div>
+
+                <!-- Products Admin Table -->
+                <div class="space-y-4" id="admin-products-list">
+                    <!-- Admin product cards will be rendered by JS -->
+                </div>
+
+                <!-- Add Product Button -->
                 <div class="mt-8 text-center">
                     <button onclick="addNewProduct()" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-dashed border-gold/40 text-gold rounded-lg hover:bg-gold/5 transition-all">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
@@ -999,68 +753,135 @@
         </div>
     </div>
 
-    <!-- Toast -->
+    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-[90] bg-dark text-white px-6 py-3 rounded-full shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none text-sm">
         <span id="toast-message"></span>
     </div>
 
     <script>
         // ============================================
-        // DATA
+        // DATA - Products
         // ============================================
         const defaultProducts = [
-            { id: 1, name: "Entremet Framboise", description: "Mousse framboise, insert coulant, biscuit amande", price: 18, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png", category: "entremets" },
-            { id: 2, name: "Mille-Feuille Classique", description: "Pâte feuilletée caramélisée, crème vanille, fondant", price: 12, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d4ae7ac4-578a-464a-bd09-b96415f06cea.png", category: "entremets" },
-            { id: 3, name: "Dôme Chocolat", description: "Ganache chocolat noir, croustillant praliné, biscuit cacao", price: 16, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d97cd048-e131-440b-b0eb-d128e8938ef8.png", category: "entremets" },
-            { id: 4, name: "Croissant Pur Beurre", description: "Pâte feuilletée artisanale, beurre AOP, dorure à l'œuf", price: 5, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1b613cce1-a48a-4e97-b99b-d02cecfe5369.png", category: "viennoiseries" },
-            { id: 5, name: "Tarte aux Fruits", description: "Pâte sablée, crème pâtissière, fruits frais de saison", price: 14, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/10f3fa9a1-71d3-4b4e-921c-4e4e9b5ba49e.png", category: "gateaux" },
-            { id: 6, name: "Coffret Macarons (12)", description: "Assortiment de 12 macarons, parfums variés", price: 24, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1124d5197-4c9f-4e2c-b774-7a1bac2077cd.png", category: "macarons" },
-            { id: 7, name: "Éclair au Chocolat", description: "Pâte à choux, crème pâtissière chocolat, glaçage fondant", price: 8, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13a383592-be6b-4354-94dc-465fc4045268.png", category: "viennoiseries" },
-            { id: 8, name: "Assortiment Mignardises", description: "Sélection de mini-pâtisseries pour un tea time raffiné", price: 32, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/19521578b-e849-4b90-86a9-b834b295572b.png", category: "gateaux" },
-            { id: 9, name: "Cake au Citron", description: "Cake moelleux au citron de Sicile, glaçage au sucre", price: 15, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/19521578b-e849-4b90-86a9-b834b295572b.png", category: "gateaux" }
+            {
+                id: 1,
+                name: "hlou",
+                description: "Noisette, Pistache, amande ,...",
+                price: 18,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png",
+                category: "entremets"
+            },
+            {
+                id: 2,
+                name: "salé",
+                description: "mini pizza, croissant salé, mini burger ,...",
+                price: 12,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d4ae7ac4-578a-464a-bd09-b96415f06cea.png",
+                category: "entremets"
+            },
+            {
+                id: 3,
+                name: "Dôme Chocolat",
+                description: "Ganache chocolat noir, croustillant praliné, biscuit cacao",
+                price: 16,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1d97cd048-e131-440b-b0eb-d128e8938ef8.png",
+                category: "entremets"
+            },
+            {
+                id: 4,
+                name: "Croissant Pur Beurre",
+                description: "Pâte feuilletée artisanale, beurre AOP, dorure à l'œuf",
+                price: 5,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1b613cce1-a48a-4e97-b99b-d02cecfe5369.png",
+                category: "viennoiseries"
+            },
+            {
+                id: 5,
+                name: "Tarte aux Fruits",
+                description: "Pâte sablée, crème pâtissière, fruits frais de saison",
+                price: 14,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/10f3fa9a1-71d3-4b4e-921c-4e4e9b5ba49e.png",
+                category: "gateaux"
+            },
+            {
+                id: 6,
+                name: "Coffret Macarons (12)",
+                description: "Assortiment de 12 macarons, parfums variés",
+                price: 24,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/1124d5197-4c9f-4e2c-b774-7a1bac2077cd.png",
+                category: "macarons"
+            },
+            {
+                id: 7,
+                name: "Éclair au Chocolat",
+                description: "Pâte à choux, crème pâtissière chocolat, glaçage fondant",
+                price: 8,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13a383592-be6b-4354-94dc-465fc4045268.png",
+                category: "viennoiseries"
+            },
+            {
+                id: 8,
+                name: "Assortiment Mignardises",
+                description: "Sélection de mini-pâtisseries pour un tea time raffiné",
+                price: 32,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/19521578b-e849-4b90-86a9-b834b295572b.png",
+                category: "gateaux"
+            },
+            {
+                id: 9,
+                name: "Cake au Citron",
+                description: "Cake moelleux au citron de Sicile, glaçage au sucre",
+                price: 15,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/19521578b-e849-4b90-86a9-b834b295572b.png",
+                category: "gateaux"
+            }
         ];
 
+        // ============================================
+        // STATE
+        // ============================================
         let products = JSON.parse(localStorage.getItem('maisonShimProducts')) || [...defaultProducts];
         let cart = [];
-        const ADMIN_PASSWORD = 'maisonshim2026';
+        let isAdminLoggedIn = false;
+        const ADMIN_PASSWORD = 'ADMIN123';
 
+        // ============================================
+        // INITIALIZATION
+        // ============================================
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
             renderAdminProducts();
             initScrollAnimations();
-            initHeaderScroll();
+            initNavbarScroll();
         });
 
         // ============================================
-        // HEADER SCROLL
+        // NAVBAR
         // ============================================
-        function initHeaderScroll() {
-            const header = document.getElementById('header-wrapper');
+        function initNavbarScroll() {
+            const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 80) {
-                    header.classList.add('scrolled');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
+                    navbar.querySelector('a').classList.remove('text-white');
                 } else {
-                    header.classList.remove('scrolled');
+                    navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
                 }
             });
         }
 
-        // ============================================
-        // MOBILE MENU
-        // ============================================
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
-            const overlay = document.getElementById('mobile-menu-overlay');
-            const burger = document.getElementById('burger-btn');
-
             menu.classList.toggle('open');
-            overlay.classList.toggle('open');
-            burger.classList.toggle('active');
-
+            const spans = document.querySelectorAll('#hamburger span');
             if (menu.classList.contains('open')) {
-                document.body.style.overflow = 'hidden';
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
             } else {
-                document.body.style.overflow = '';
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
             }
         }
 
@@ -1070,7 +891,9 @@
         function initScrollAnimations() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
@@ -1078,7 +901,7 @@
         }
 
         // ============================================
-        // PRODUCTS
+        // PRODUCTS RENDERING
         // ============================================
         function renderProducts(category = 'all') {
             const grid = document.getElementById('products-grid');
@@ -1087,7 +910,7 @@
             grid.innerHTML = filtered.map(product => `
                 <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 fade-in visible" data-category="${product.category}">
                     <div class="relative overflow-hidden aspect-[4/3]">
-                        <img src="${product.image}" alt="${product.name}" class="product-img w-full h-full object-cover transition-transform duration-700">
+                        <img src="${product.image}" alt="${product.name}" class="product-img w-full h-full object-cover transition-transform duration-700" id="product-img-${product.id}">
                         <div class="absolute top-3 right-3">
                             <button onclick="addToCart(${product.id})" class="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-gold hover:text-white transition-all shadow-sm">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
@@ -1096,10 +919,10 @@
                     </div>
                     <div class="p-5">
                         <div class="flex items-start justify-between mb-2">
-                            <h3 class="font-heading text-lg font-semibold">${product.name}</h3>
-                            <span class="text-gold font-heading text-lg font-bold">${product.price} DT</span>
+                            <h3 class="font-heading text-lg font-semibold" id="product-name-${product.id}">${product.name}</h3>
+                            <span class="text-gold font-heading text-lg font-bold" id="product-price-${product.id}">${product.price} DT</span>
                         </div>
-                        <p class="text-dark/50 text-sm leading-relaxed mb-4">${product.description}</p>
+                        <p class="text-dark/50 text-sm leading-relaxed mb-4" id="product-desc-${product.id}">${product.description}</p>
                         <button onclick="orderViaWhatsApp(${product.id})" class="product-order-btn w-full py-2.5 rounded-lg text-sm tracking-wider uppercase font-medium border border-dark/20 hover:border-[#25D366] hover:text-[#25D366] transition-all flex items-center justify-center gap-2">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                             Commander
@@ -1131,13 +954,13 @@
                 cart.push({ ...product, quantity: 1 });
             }
 
-            updateCartBadges();
+            updateCartUI();
             showToast(`${product.name} ajouté au panier`);
         }
 
         function removeFromCart(productId) {
             cart = cart.filter(item => item.id !== productId);
-            updateCartBadges();
+            updateCartUI();
             renderCartItems();
         }
 
@@ -1149,46 +972,40 @@
                 removeFromCart(productId);
                 return;
             }
-            updateCartBadges();
+            updateCartUI();
             renderCartItems();
         }
 
-        function updateCartBadges() {
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-            // Mobile badge
-            const mobileBadge = document.getElementById('cart-count-mobile');
-            const desktopBadge = document.getElementById('cart-count-desktop');
-
-            [mobileBadge, desktopBadge].forEach(badge => {
-                if (!badge) return;
-                if (totalItems > 0) {
-                    badge.textContent = totalItems;
-                    badge.classList.remove('hidden-badge');
-                    badge.classList.add('cart-badge');
-                    setTimeout(() => badge.classList.remove('cart-badge'), 300);
-                } else {
-                    badge.classList.add('hidden-badge');
-                    badge.classList.remove('cart-badge');
-                }
-            });
+            if (totalItems > 0) {
+                countEl.textContent = totalItems;
+                countEl.classList.remove('hidden');
+                countEl.classList.add('cart-badge');
+                setTimeout(() => countEl.classList.remove('cart-badge'), 300);
+            } else {
+                countEl.classList.add('hidden');
+            }
         }
 
         function openCart() {
             const modal = document.getElementById('cart-modal');
             const panel = document.getElementById('cart-panel');
-            modal.classList.add('open');
+            modal.classList.remove('hidden');
             renderCartItems();
-            document.body.style.overflow = 'hidden';
-            setTimeout(() => panel.classList.add('open'), 10);
+            setTimeout(() => {
+                panel.style.transform = 'translateX(0)';
+            }, 10);
         }
 
         function closeCart() {
-            const modal = document.getElementById('cart-modal');
             const panel = document.getElementById('cart-panel');
-            panel.classList.remove('open');
-            document.body.style.overflow = '';
-            setTimeout(() => modal.classList.remove('open'), 350);
+            panel.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.getElementById('cart-modal').classList.add('hidden');
+            }, 300);
         }
 
         function renderCartItems() {
@@ -1204,17 +1021,17 @@
             footer.classList.remove('hidden');
             container.innerHTML = cart.map(item => `
                 <div class="flex items-center gap-4 py-3 border-b border-dark/5">
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover flex-shrink-0">
-                    <div class="flex-1 min-w-0">
-                        <h4 class="font-medium text-sm truncate">${item.name}</h4>
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-sm">${item.name}</h4>
                         <p class="text-gold text-sm font-medium">${item.price} DT</p>
                     </div>
-                    <div class="flex items-center gap-2 flex-shrink-0">
+                    <div class="flex items-center gap-2">
                         <button onclick="updateCartQuantity(${item.id}, -1)" class="w-7 h-7 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark/5 text-sm">-</button>
                         <span class="w-6 text-center text-sm font-medium">${item.quantity}</span>
                         <button onclick="updateCartQuantity(${item.id}, 1)" class="w-7 h-7 rounded-full border border-dark/20 flex items-center justify-center hover:bg-dark/5 text-sm">+</button>
                     </div>
-                    <button onclick="removeFromCart(${item.id})" class="p-1 text-dark/30 hover:text-red-500 transition-colors flex-shrink-0">
+                    <button onclick="removeFromCart(${item.id})" class="p-1 text-dark/30 hover:text-red-500 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                 </div>
@@ -1222,7 +1039,7 @@
         }
 
         // ============================================
-        // WHATSAPP
+        // WHATSAPP ORDERING
         // ============================================
         function orderViaWhatsApp(productId) {
             const product = products.find(p => p.id === productId);
@@ -1268,7 +1085,7 @@
 
             const message = encodeURIComponent(
                 ` *Nouvelle commande Click & Collect* - Maison Shim\n\n` +
-                `👤 Nom : ${name}\n` +
+                ` Nom : ${name}\n` +
                 `🕐 Heure de retrait : ${time}\n\n` +
                 `📦 Articles :\n${itemsList}\n\n` +
                 `💰 Total : ${total} DT\n` +
@@ -1279,12 +1096,12 @@
             window.open(`https://wa.me/21650649616?text=${message}`, '_blank');
             closeClickCollect();
             cart = [];
-            updateCartBadges();
+            updateCartUI();
             showToast('Commande envoyée via WhatsApp !');
         }
 
         // ============================================
-        // CONTACT
+        // CONTACT FORM
         // ============================================
         function handleContactForm(e) {
             e.preventDefault();
@@ -1306,7 +1123,9 @@
 
         function handleAdminLogin(e) {
             e.preventDefault();
-            if (document.getElementById('admin-password').value === ADMIN_PASSWORD) {
+            const password = document.getElementById('admin-password').value;
+            if (password === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
                 closeAdminLogin();
                 openAdminDashboard();
                 document.getElementById('admin-password').value = '';
@@ -1316,6 +1135,7 @@
         }
 
         function adminLogout() {
+            isAdminLoggedIn = false;
             closeAdminDashboard();
             showToast('Déconnexion réussie');
         }
@@ -1337,24 +1157,27 @@
             container.innerHTML = products.map(product => `
                 <div class="bg-white rounded-xl p-6 shadow-sm border border-dark/5" id="admin-product-${product.id}">
                     <div class="flex flex-col md:flex-row gap-6">
+                        <!-- Image -->
                         <div class="w-full md:w-48 flex-shrink-0">
                             <div class="relative aspect-[4/3] rounded-lg overflow-hidden bg-cream">
                                 <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" id="admin-img-${product.id}">
                             </div>
                             <div class="mt-2">
-                                <label class="text-xs text-dark/50 mb-1 block">Image URL</label>
+                                <label class="text-xs text-dark/50 mb-1 block">Image du produit</label>
                                 <input type="url" value="${product.image}" onchange="updateProductImage(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-xs outline-none" placeholder="URL de l'image">
                             </div>
                         </div>
+
+                        <!-- Details -->
                         <div class="flex-1 space-y-4">
                             <div class="flex flex-wrap gap-4">
                                 <div class="flex-1 min-w-[200px]">
-                                    <label class="text-xs text-dark/50 mb-1 block">Nom</label>
-                                    <input type="text" value="${product.name}" onchange="updateProductName(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none font-medium">
+                                    <label class="text-xs text-dark/50 mb-1 block">Nom du produit</label>
+                                    <input type="text" value="${product.name}" onchange="updateProductName(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none font-medium" id="admin-name-${product.id}">
                                 </div>
                                 <div class="w-32">
                                     <label class="text-xs text-dark/50 mb-1 block">Prix (DT)</label>
-                                    <input type="number" value="${product.price}" onchange="updateProductPrice(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none font-bold text-gold">
+                                    <input type="number" value="${product.price}" onchange="updateProductPrice(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none font-bold text-gold" id="admin-price-${product.id}">
                                 </div>
                                 <div class="w-40">
                                     <label class="text-xs text-dark/50 mb-1 block">Catégorie</label>
@@ -1367,10 +1190,14 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="text-xs text-dark/50 mb-1 block">Description</label>
-                                <input type="text" value="${product.description}" onchange="updateProductDesc(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none">
+                                <label class="text-xs text-dark/50 mb-1 block">Description courte</label>
+                                <input type="text" value="${product.description}" onchange="updateProductDesc(${product.id}, this.value)" class="input-field w-full px-3 py-2 rounded-lg border border-dark/15 bg-cream/50 text-dark text-sm outline-none" id="admin-desc-${product.id}">
                             </div>
-                            <button onclick="deleteProduct(${product.id})" class="px-4 py-2 text-xs text-red-500 border border-red-200 rounded-lg hover:bg-red-50 transition-colors">Supprimer</button>
+                            <div class="flex gap-2">
+                                <button onclick="deleteProduct(${product.id})" class="px-4 py-2 text-xs text-red-500 border border-red-200 rounded-lg hover:bg-red-50 transition-colors">
+                                    Supprimer
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1379,31 +1206,57 @@
 
         function updateProductImage(id, url) {
             const product = products.find(p => p.id === id);
-            if (product) { product.image = url; saveProducts(); showToast('Image mise à jour'); }
+            if (product) {
+                product.image = url;
+                saveProducts();
+                document.getElementById(`admin-img-${id}`).src = url;
+                showToast('Image mise à jour');
+            }
         }
 
         function updateProductName(id, name) {
             const product = products.find(p => p.id === id);
-            if (product) { product.name = name; saveProducts(); showToast('Nom mis à jour'); }
+            if (product) {
+                product.name = name;
+                saveProducts();
+                document.getElementById(`product-name-${id}`).textContent = name;
+                showToast('Nom mis à jour');
+            }
         }
 
         function updateProductPrice(id, price) {
             const product = products.find(p => p.id === id);
-            if (product) { product.price = parseFloat(price) || 0; saveProducts(); showToast('Prix mis à jour'); }
+            if (product) {
+                product.price = parseFloat(price) || 0;
+                saveProducts();
+                const priceEl = document.getElementById(`product-price-${id}`);
+                if (priceEl) priceEl.textContent = `${product.price} DT`;
+                showToast('Prix mis à jour');
+            }
         }
 
         function updateProductDesc(id, desc) {
             const product = products.find(p => p.id === id);
-            if (product) { product.description = desc; saveProducts(); showToast('Description mise à jour'); }
+            if (product) {
+                product.description = desc;
+                saveProducts();
+                const descEl = document.getElementById(`product-desc-${id}`);
+                if (descEl) descEl.textContent = desc;
+                showToast('Description mise à jour');
+            }
         }
 
         function updateProductCategory(id, category) {
             const product = products.find(p => p.id === id);
-            if (product) { product.category = category; saveProducts(); showToast('Catégorie mise à jour'); }
+            if (product) {
+                product.category = category;
+                saveProducts();
+                showToast('Catégorie mise à jour');
+            }
         }
 
         function deleteProduct(id) {
-            if (confirm('Supprimer ce produit ?')) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) {
                 products = products.filter(p => p.id !== id);
                 saveProducts();
                 renderAdminProducts();
@@ -1414,11 +1267,20 @@
 
         function addNewProduct() {
             const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-            products.push({ id: newId, name: "Nouveau Produit", description: "Description du produit", price: 10, image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png", category: "entremets" });
+            products.push({
+                id: newId,
+                name: "Nouveau Produit",
+                description: "Description du produit",
+                price: 10,
+                image: "https://image.qwenlm.ai/public_source/94046126-af19-458b-9afa-ba1661da488a/13f3995ee-a079-4242-ad59-e74d09f8f020.png",
+                category: "entremets"
+            });
             saveProducts();
             renderAdminProducts();
             renderProducts();
             showToast('Nouveau produit ajouté');
+
+            // Scroll to the new product
             setTimeout(() => {
                 const el = document.getElementById(`admin-product-${newId}`);
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1434,7 +1296,8 @@
         // ============================================
         function showToast(message) {
             const toast = document.getElementById('toast');
-            document.getElementById('toast-message').textContent = message;
+            const msgEl = document.getElementById('toast-message');
+            msgEl.textContent = message;
             toast.style.transform = 'translateY(0)';
             toast.style.opacity = '1';
             setTimeout(() => {
@@ -1449,10 +1312,10 @@
         window.addEventListener('scroll', () => {
             const heroImg = document.getElementById('hero-img');
             if (heroImg) {
-                heroImg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+                const scrolled = window.scrollY;
+                heroImg.style.transform = `translateY(${scrolled * 0.3}px)`;
             }
         });
     </script>
 </body>
 </html>
-
